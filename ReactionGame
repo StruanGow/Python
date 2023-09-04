@@ -1,0 +1,59 @@
+def randombutton():
+    global button, scorecount
+    game.start_countdown(50000)
+    OLED.clear()
+    button = randint(0, 4)
+    scorecount = 1
+    totalscore()
+    if button == 0:
+        OLED.write_string_new_line("Button A")
+    elif button == 1:
+        OLED.write_string_new_line("Button B")
+    elif button == 2:
+        OLED.write_string_new_line("Button C")
+    elif button == 3:
+        OLED.write_string_new_line("Button D")
+    elif button == 4:
+        OLED.write_string_new_line("Button E")
+def totalscore():
+    global score
+    if scorecount == 1:
+        score += 1
+def yourscore():
+    global scorecount
+    scorecount = 0
+    OLED.write_string("Score: ")
+    OLED.write_num_new_line(score)
+    basic.pause(250)
+scorecount = 0
+button = 0
+score = 0
+score = 0
+tinkercademy.crash_sensor_setup(DigitalPin.P1)
+OLED.init(128, 64)
+OLED.write_string_new_line("Ready?")
+OLED.write_string_new_line("Press the crash test to begin!")
+
+def on_forever():
+    if tinkercademy.crash_sensor():
+        OLED.clear()
+        randombutton()
+        basic.pause(750)
+    if not (game.is_game_over()):
+        if button == 0 and tinkercademy.ad_keyboard(ADKeys.A, AnalogPin.P0):
+            yourscore()
+        elif button == 1 and tinkercademy.ad_keyboard(ADKeys.B, AnalogPin.P0):
+            yourscore()
+        elif button == 2 and tinkercademy.ad_keyboard(ADKeys.C, AnalogPin.P0):
+            yourscore()
+        elif button == 3 and tinkercademy.ad_keyboard(ADKeys.D, AnalogPin.P0):
+            yourscore()
+        elif button == 4 and tinkercademy.ad_keyboard(ADKeys.E, AnalogPin.P0):
+            yourscore()
+    else:
+        OLED.clear()
+        OLED.write_string("Well done, your final score was ")
+        OLED.write_num_new_line(score)
+        basic.pause(20000)
+        OLED.clear()
+basic.forever(on_forever)
