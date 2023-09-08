@@ -1,0 +1,72 @@
+def choice_fun():
+  choice_fun.choice = str(input("Calculator or comparison? "))
+  if choice_fun.choice != "calculator" and choice_fun.choice != "comparison":
+    print("Invalid response. Please type either calculator or comparison. ")
+    choice_fun()
+
+choice_fun()
+
+def num():
+  num.num1 = input("First Number: ")
+  num.num2 = input("Second Number: ")
+  if num.num1.isdigit() == False or num.num2.isdigit() == False:
+    print("Invalid response. Please input numbers. ")
+    num()
+num()
+
+def calc():
+  op = input("Enter an operator (+, -, *, /, **, //): ")
+  if op == "+":
+    print(num.num1+num.num2)
+  elif op == "-":
+    print(num.num1-num.num2)
+  elif op == "*":
+    print(num.num1*num.num2)
+  elif op == "**":
+    print(num.num1**num.num2)
+  elif op == "/":
+    print(num.num1/num.num2)
+  elif op == "//":
+    print(num.num1//num.num2)
+  else:
+    print("Invalid Response. Please use operators +, -, *, /, **, //: \n")
+    calc()
+def comparison():
+  comp = input("Enter a comparison between the two numbers (>, <, >=, <=, !=): ")
+  if comp == ">":
+    end = num.num1 > num.num2
+    if end == True:
+      print("First number is greater than the second")
+    else:
+      print("Second number is greater than the first")
+  elif comp == "<":
+    end = num.num1 < num.num2
+    if end == True:
+      print("First number is smaller than the second")
+    else:
+      print("Second number is smaller than the first")
+  elif comp == ">=":
+    end = num.num1 >= num.num2
+    if end == True:
+      print("First number is greater or equal than the second")
+    else:
+      print("Second number is greater than the first")
+  elif comp == "<=":
+    end = num.num1 <= num.num2
+    if end == True:
+      print("First number is smaller or equal than the second")
+    else:
+      print("Second number is smaller than the first")
+  elif comp == "!=":
+    end = num.num1 != num.num2
+    if end == True:
+      print("The numbers are not equal.")
+    else:
+      print("The numbers are equal.")
+  else:
+    print("Incorrect Response. Please use operators > , <, >=, <=, !=: \n")
+    comparison()
+if choice_fun.choice == "calculator":
+  calc()
+elif choice_fun.choice == "comparison":
+  comparison()
