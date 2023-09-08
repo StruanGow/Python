@@ -1,0 +1,20 @@
+from turtle import *
+
+t = Turtle()
+t.right(-90)
+angle = 30
+def fractal_tree(size, level):
+  if level > 0:
+    colormode(255)
+    t.pencolor(0,255//level,0)
+    t.forward(size)
+    t.right(angle)
+    fractal_tree(0.8 * size, level-1)
+    t.pencolor(0,255//level,0)
+    t.left(2*angle)
+    fractal_tree(0.8 * size, level-1)
+    t.pencolor(0,255//level,0)
+    t.right(angle)
+    t.forward(-size)
+
+fractal_tree(80,10)

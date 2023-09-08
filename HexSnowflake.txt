@@ -1,0 +1,35 @@
+import turtle
+turtle.screensize(2000,2000)
+t = turtle.Turtle()
+turtle.bgcolor('black')
+t.fillcolor('white')
+t.pencolor('light sky blue')
+turtle.tracer(False)
+
+def hexagon (x,y,length):
+  t.up()
+  t.goto(x,y)
+  t.seth(90)
+  t.forward(length)
+  t.left(120)
+  t.down()
+  t.begin_fill()
+  for side in range(6):
+    t.forward(length)
+    t.left(60)
+  t.end_fill()
+
+def snowflake(x,y,length,n):
+  if n==0:
+    hexagon(x,y,length)
+    return
+  snowflake(x,y,length/3,n-1)
+  direction = 90
+  for number in range(6):
+    t.up()
+    t.goto(x,y)
+    t.seth(direction)
+    t.forward(length*2/3)
+    snowflake(t.xcor(),t.ycor(),length/3,n-1)
+    direction += 60
+snowflake(0,0,200,5)
