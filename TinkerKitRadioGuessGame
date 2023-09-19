@@ -1,0 +1,60 @@
+def sending():
+    OLED.write_string_new_line("Now, your number:")
+    while True:
+        if tinkercademy.ad_keyboard(ADKeys.A, AnalogPin.P0):
+            radio.send_number(1)
+            break
+        elif tinkercademy.ad_keyboard(ADKeys.B, AnalogPin.P0):
+            radio.send_number(2)
+            break
+        elif tinkercademy.ad_keyboard(ADKeys.C, AnalogPin.P0):
+            radio.send_number(3)
+            break
+        elif tinkercademy.ad_keyboard(ADKeys.D, AnalogPin.P0):
+            radio.send_number(4)
+            break
+        elif tinkercademy.ad_keyboard(ADKeys.E, AnalogPin.P0):
+            radio.send_number(5)
+            break
+
+def on_received_number(receivedNumber):
+    global actual
+    if guessed != 0:
+        actual = receivedNumber
+        results()
+radio.on_received_number(on_received_number)
+
+def results():
+    if actual == guessed:
+        OLED.write_string_new_line("Well done, you guessed right!")
+    elif actual != guessed:
+        OLED.write_string_new_line("Not quite!")
+def guess():
+    global guessed
+    OLED.write_string_new_line("Guess what button the other person has pressed: ")
+    while guessed == 0:
+        if tinkercademy.ad_keyboard(ADKeys.A, AnalogPin.P0):
+            guessed = 1
+            basic.pause(500)
+            sending()
+        elif tinkercademy.ad_keyboard(ADKeys.B, AnalogPin.P0):
+            guessed = 2
+            basic.pause(500)
+            sending()
+        elif tinkercademy.ad_keyboard(ADKeys.C, AnalogPin.P0):
+            guessed = 3
+            basic.pause(500)
+            sending()
+        elif tinkercademy.ad_keyboard(ADKeys.D, AnalogPin.P0):
+            guessed = 4
+            basic.pause(500)
+            sending()
+        elif tinkercademy.ad_keyboard(ADKeys.E, AnalogPin.P0):
+            guessed = 5
+            basic.pause(500)
+            sending()
+actual = 0
+guessed = 0
+OLED.init(128, 64)
+radio.set_group(1)
+guess()
