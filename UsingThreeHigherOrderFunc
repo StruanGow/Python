@@ -1,0 +1,5 @@
+from functools import reduce
+#find total cost of items that cost more than £150
+costs = {"shirt": (4, 13.00), "shoes":(2, 80.00), "pants":(3, 100.00), "socks":(5, 5.00), "ties":(3, 14.00), "watch":(1, 145.00)}
+total = reduce(lambda x,y: x+y, filter(lambda r: r > 150, map(lambda q: costs[q][0] * costs[q][1], costs)))
+print(total)
